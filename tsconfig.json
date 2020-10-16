@@ -17,7 +17,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    //solving error 'any'
+    //"noImplicitAny": false,
+    //not a module
+    //"typeRoots": ["node_modules/@types"],
+    //"types": ["@types/webrtc"]
   },
   "include": [
     "src"
