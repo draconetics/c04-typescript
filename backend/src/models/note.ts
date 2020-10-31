@@ -1,12 +1,7 @@
-import { model, Schema, Document } from "mongoose";
+import mongoose from "mongoose";
+import {INote} from '../interfaces/INote'
 
-
-export interface INote extends Document {
-    text: string,
-    complete: boolean
-};
-
-const noteSchema = new Schema({
+const noteSchema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
@@ -16,7 +11,7 @@ const noteSchema = new Schema({
     type: Boolean,
     required: true
   }
-});
+},{  timestamps: true });
 
 
-export default model<INote>("Note", noteSchema);
+export = mongoose.model<INote>("Note", noteSchema);

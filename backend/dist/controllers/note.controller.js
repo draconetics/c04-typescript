@@ -12,14 +12,66 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createNote = exports.getNoteList = void 0;
+exports.deleteNoteById = exports.getNoteById = exports.createNote = exports.getNoteList = void 0;
 const note_1 = __importDefault(require("../models/note"));
-exports.getNoteList = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const notes = yield note_1.default.find({});
-    return res.status(200).json({ notes });
+const HttpException_1 = require("../common/HttpException");
+const note_utils_1 = require("./utils/note.utils");
+const mongoose_1 = __importDefault(require("mongoose"));
+exports.getNoteList = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const notes = yield note_1.default.find({});
+        let resp = {
+            status: 200,
+            message: "success",
+            data: notes
+        };
+        res.status(200).json(resp);
+    }
+    catch (e) {
+        next(new HttpException_1.HttpException(e.status, e.message));
+    }
 });
-exports.createNote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newNote = new note_1.default(req.body);
-    yield newNote.save();
-    return res.status(201).json(newNote);
+exports.createNote = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        note_utils_1.validate(req.body);
+        const newNote = new note_1.default(req.body);
+        yield newNote.save();
+        res.status(201).json({ status: 201, message: "success", data: newNote });
+    }
+    catch (e) {
+        //console.log("this is the catcher")
+        //console.log(e)
+        next(new HttpException_1.HttpException(e.status, e.message));
+    }
+});
+exports.getNoteById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        note_utils_1.validateParamId(req.params.id, next);
+        let id = mongoose_1.default.Types.ObjectId(req.params.id);
+        const noteFound = yield note_1.default.findOne({ _id: id });
+        if (noteFound)
+            res.status(200).json({ status: 200, message: "success", data: noteFound });
+        next(new HttpException_1.HttpException(500, "Note not Found"));
+    }
+    catch (e) {
+        //console.log("this is the catcher")
+        //console.log(e)
+        next(new HttpException_1.HttpException(e.status, e.message));
+    }
+});
+exports.deleteNoteById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        note_utils_1.validateParamId(req.params.id, next);
+        let id = mongoose_1.default.Types.ObjectId(req.params.id);
+        const noteFound = yield note_1.default.findByIdAndRemove(id);
+        //console.log(noteFound)
+        if (noteFound)
+            res.status(200).json({ status: 200, message: "success", data: noteFound });
+        next(new HttpException_1.HttpException(500, "Not found element to delete"));
+    }
+    catch (e) {
+        //console.log("this is the catcher")
+        //console.log(e)
+        next(new HttpException_1.HttpException(e.status, e.message));
+    }
 });
