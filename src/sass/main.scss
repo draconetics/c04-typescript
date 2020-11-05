@@ -1,0 +1,19 @@
+//abstracts
+@import './abstract/variables';
+
+//base
+@import './base/reset';
+//@import './base/global';
+//@import './base/typhography';
+
+//components
+@import './components/button';
+@import './components/loading';
+@import './components/noteBoard';
+@import './components/alert';
+@import './components/input';
+@import './components/menu';
+
+//pages
+//@import './pages/loading-page';
+//@import './pages/app';

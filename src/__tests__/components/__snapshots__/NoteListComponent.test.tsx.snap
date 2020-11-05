@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#ListItemComponent checking PropTypes should show a list because noteList:[1item] 1`] = `
+<div
+  data-test="NoteListComponent"
+>
+  <div
+    className="note-container"
+  >
+    <ul
+      className="note-list"
+      id="note-list"
+      onDragOver={[Function]}
+      onDrop={[Function]}
+    >
+      <li
+        draggable="true"
+        id="note-list-0"
+        key="0"
+        onDragStart={[Function]}
+      >
+        this is a task
+      </li>
+    </ul>
+    <ul
+      className="note-done-list"
+      id="note-done-list"
+      onDragOver={[Function]}
+      onDrop={[Function]}
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+.btn{
+    padding: .5rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btn.btn-success{
+    background-color: $primary;
+    color: $white;
+    border: none;
+}

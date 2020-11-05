@@ -1,7 +1,7 @@
-import axios, { AxiosInstance }  from 'axios'
+import {http}  from  '../config/http-common'
 
 class NoteService {
-
+/*
     http:AxiosInstance;
 
     constructor(){
@@ -12,13 +12,13 @@ class NoteService {
             },
         });
     }
-
+*/
   async getList() {
-        return await this.http.get("/list");
+        return await http.get("/api/notes");
   }
 
    async createNote(data:Todo){
-      return await this.http.post("/new", data);    
+      return await http.post("/new", data);    
     }
 }
 export default new NoteService();

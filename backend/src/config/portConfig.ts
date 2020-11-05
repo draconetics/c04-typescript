@@ -1,5 +1,5 @@
 //default development port
-export let PORT:number = 3000;
+export let PORT:number = 3005;
 
 
 if (process.env.NODE_ENV === 'test') 

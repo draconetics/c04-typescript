@@ -1,0 +1,50 @@
+.note-board__title{
+    background-color: #efefef;
+    border: 1px solid gainsboro;
+    padding: 1rem;
+    border: 1rem auto;
+    display: block;
+}
+
+.note-board{
+    min-height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+}
+
+.note-board__add-note{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.note-board__list{
+    width: 50%;
+    padding: 1rem;
+}
+
+.note-board__list--done{
+    width: 50%;
+    padding: 1rem;
+}
+
+.note-board__item{
+    padding: .5rem;
+    background-color: #efefef;
+    width: 100%;
+    height: fit-content;
+    margin: .5rem;
+    border: 1px solid gray;
+    display: flex;
+}
+
+.note-board__item__text{
+    flex:1;
+}
+
+.note-board__icon:hover{
+    cursor: pointer;
+}

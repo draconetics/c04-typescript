@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PORT = void 0;
 //default development port
-exports.PORT = 3000;
+exports.PORT = 3005;
 if (process.env.NODE_ENV === 'test') {
     exports.PORT = 3001;
 }

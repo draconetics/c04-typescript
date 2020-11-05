@@ -1,50 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { TodoListComponent } from "./components/TodoListComponent";
-import { AddTodoComponent } from "./components/AddTodoComponent";
-import NoteService from './services/NoteService'
+import  NoteListComponent from "./components/NoteListComponent/";
+import MenuComponent from "./components/MenuComponent"
+import LoginFormComponent from "./components/LoginFormComponent"
+import RegisterFormComponent from "./components/RegisterFormComponent"
+import NotFoundPageComponent from "./components/NotFoundPageComponent"
+import HomePage from "./pages/Home"
+
+
+
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Array<Todo>>([]);
-
-  useEffect(() => {
-      updateTodoList();
-  }, [])
-
-  const updateTodoList = () =>{
-    NoteService.getList()
-        .then(({data})=>{
-          console.log(data)
-          setTodos(data.notes)
-        }).catch(e => {console.error(e)})
-  }
-  const toggleComplete: ToggleComplete = selectedTodo => {
-    const updatedTodos = todos.map(todo => {
-      if (todo === selectedTodo) {
-        return { ...todo, complete: !todo.complete };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-
-  const addTodo: AddTodo = newTodo => {
-    
-
-    const todo = { text: newTodo, complete: false }
-    
-    if(newTodo.trim() !== "")
-    NoteService.createNote(todo)
-      .then(({data})=>{
-        console.log(data)
-        updateTodoList();
-      }).catch(e => {console.error(e)})
-  };
-
   return (
     <React.Fragment>
-      <TodoListComponent todos={todos} toggleComplete={toggleComplete} />
-      <AddTodoComponent addTodo={addTodo} />
+      <BrowserRouter>
+        <MenuComponent></MenuComponent>
+        <Switch>
+            <Route exact path={["/","/home"]} component={HomePage}></Route>
+            <Route path="/notelist" component={NoteListComponent}></Route>
+            <Route path="/todolist" component={TodoListComponent}></Route>
+            <Route path="/login" component={LoginFormComponent}></Route>
+            <Route path="/register" component={RegisterFormComponent}></Route>
+            <Route path='/404' component={NotFoundPageComponent} />
+            <Redirect from='*' to='/404' />
+        </Switch>
+      </BrowserRouter>
+      
     </React.Fragment>
   );
 };

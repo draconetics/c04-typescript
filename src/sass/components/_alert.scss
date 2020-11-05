@@ -1,0 +1,18 @@
+.alert{
+    width: 100%;
+    max-width: 1100px;
+    padding: .5rem;
+    display: grid;
+    margin: 1rem auto;
+    text-align: left;
+}
+
+.alert.alert-danger{
+    color: $white;
+    background-color: $danger;
+}
+
+.alert.alert-info{
+    color: $white;
+    background-color: $info;
+}

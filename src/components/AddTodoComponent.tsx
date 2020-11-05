@@ -5,7 +5,7 @@ interface AddTodoFormProps {
   addTodo: AddTodo;
 }
 
-export const AddTodoComponent: React.FC<AddTodoFormProps> = ({ addTodo }) => {
+const AddTodoComponent: React.FC<AddTodoFormProps> = ({ addTodo }) => {
   const [newTodo, setNewTodo] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,3 +27,5 @@ export const AddTodoComponent: React.FC<AddTodoFormProps> = ({ addTodo }) => {
     </form>
   );
 };
+
+export default AddTodoComponent;
