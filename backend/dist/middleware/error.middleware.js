@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorHandler = void 0;
 exports.errorHandler = (error, request, response, next) => {
     if (error !== null) {
-        //console.log("error exist !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         //console.log(error);
         const status = error.status || 500;
         const message = error.message || "It's not you. It's us. We are having some problems.";

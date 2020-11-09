@@ -23,7 +23,7 @@ describe('#notesReducer', ()=>{
                 error:""
             }
             const newState = noteReducer(undefined, {
-                type: actionTypes.GET_NOTES,
+                type: actionTypes.SET_NOTES,
                 value: noteList
             });
             expect(newState).toEqual(resultState);

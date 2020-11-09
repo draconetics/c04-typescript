@@ -71,24 +71,20 @@ export const NoteListComponent:React.FC<IProps> = (props)=>{
         setEditMode(false);
     }
 
-    const ShowAlert = () =>{
+    const showAlert = () =>{
         if(props.error){
             return <span className="alert alert-danger">{props.error}</span>
         }
         return null;
     }
 
-    const ShowAlertEmptyList = (props:{list:INote[]}) =>{
-        if(props.list.length === 0)
+    const showAlertEmptyList = (list:INote[]) =>{
+        if(list.length === 0)
             return (<span>List is Empty</span>)
         else
             return null;
     }
 
-    const showList = () =>{
-        
-        return null;
-    }
     
     const droppableIdToList = (id:string) => {
         if(id === "droppable")
@@ -145,13 +141,13 @@ export const NoteListComponent:React.FC<IProps> = (props)=>{
     const noteBoardList = ()=>{
         return (<div className="note-board__list">
         <h2>TODO LIST</h2>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId="droppable" data-test="droppable">
             {(provided, snapshot) => (<>
                 
                 <div
                     ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}>
-                    <ShowAlertEmptyList list={props.noteList}></ShowAlertEmptyList>        
+                    {showAlertEmptyList(props.noteList)} 
                     {props.noteList.map((item, index) => (
                         <Draggable
                             key={item._id}
@@ -186,12 +182,13 @@ export const NoteListComponent:React.FC<IProps> = (props)=>{
     const noteBoardListDone = ()=>{
         return(<div className="note-board__list--done">
             <h2>DONE LIST</h2>
-            <Droppable droppableId="droppable2">
+            <Droppable droppableId="droppable2" data-test="droppable2">
                 {(provided, snapshot) => (
                     <div
+                        data-test="div"
                         ref={provided.innerRef}
                         style={getDoneListStyle(snapshot.isDraggingOver)}>
-                        <ShowAlertEmptyList list={noteDoneList}></ShowAlertEmptyList>        
+                        {showAlertEmptyList(noteDoneList)}      
                         {noteDoneList.map((item, index) => (
                             <Draggable
                                 key={item._id}
@@ -228,7 +225,7 @@ export const NoteListComponent:React.FC<IProps> = (props)=>{
                 editMode={editMode} 
                 saveNote={saveNote}
                 cancel={cancel}/>
-            <ShowAlert></ShowAlert>
+            {showAlert()}
             <DragDropContext onDragEnd={onDragEnd}>
                 {noteBoardList()}                
                 {noteBoardListDone()}

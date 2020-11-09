@@ -2,11 +2,12 @@
 //declare module 'types-module';
 //import {Dispatch} from 'redux'
 type Todo = {
+    _id?:string;
     text: string;
     complete: boolean;
   };
 
-  type ToggleComplete = (selectedTodo: Todo) => void;
+  type ToggleComplete = (selectedTodo: number) => void;
   
   type AddTodo = (newTodo: string) => void;
 

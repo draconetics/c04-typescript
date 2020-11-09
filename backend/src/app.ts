@@ -1,7 +1,10 @@
 import express from 'express'
 import cors from 'cors';
 import morgan from 'morgan';
-import noteRoutes from './routes/note.routes';
+//routes
+import noteRoutes from './routes/note.route';
+import userRoutes from './routes/user.route'
+import authRoutes from './routes/auth.route'
 import {errorHandler} from './middleware/error.middleware'
 import {notFoundHandler} from './middleware/notFound.middleware'
 
@@ -15,6 +18,8 @@ app.use(express.json());
 
 
 app.use(noteRoutes);
+app.use(userRoutes);
+app.use(authRoutes);
 
 app.get('/', (req, res) => {
   return res.send(`The API is at http://localhost:${app.get('port')}`);

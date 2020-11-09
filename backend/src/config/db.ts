@@ -27,4 +27,4 @@ const connectToDataBase = (resolve: Function, reject:Function, url:string)=>
 const closeConnection = ()=> mongoose.disconnect();
 
 
-module.exports = { connect, closeConnection };
+export = { connect, closeConnection };

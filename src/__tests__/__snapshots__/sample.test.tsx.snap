@@ -2,13 +2,51 @@
 
 exports[`#App component show App component 1`] = `
 <Fragment>
-  <Connect(NoteListComponent) />
-  <TodoListComponent
-    todos={Array []}
-    toggleComplete={[Function]}
-  />
-  <AddTodoComponent
-    addTodo={[Function]}
-  />
+  <BrowserRouter>
+    <MenuComponent />
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path={
+          Array [
+            "/",
+            "/home",
+          ]
+        }
+      />
+      <Route
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          }
+        }
+        path="/notelist"
+      />
+      <Route
+        component={[Function]}
+        path="/todolist"
+      />
+      <Route
+        component={[Function]}
+        path="/login"
+      />
+      <Route
+        component={[Function]}
+        path="/register"
+      />
+      <Route
+        component={[Function]}
+        path="/404"
+      />
+      <Redirect
+        from="*"
+        to="/404"
+      />
+    </Switch>
+  </BrowserRouter>
 </Fragment>
 `;

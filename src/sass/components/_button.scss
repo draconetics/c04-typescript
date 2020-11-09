@@ -9,3 +9,8 @@
     color: $white;
     border: none;
 }
+
+.btn.btn-success:hover{
+    background-color: rgba($primary, .8);
+    cursor: pointer;
+}

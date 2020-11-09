@@ -18,7 +18,7 @@ class NoteService {
   }
 
    async createNote(data:Todo){
-      return await http.post("/new", data);    
+      return await http.post("/api/notes", data);    
     }
 }
 export default new NoteService();

@@ -6,7 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
-const note_routes_1 = __importDefault(require("./routes/note.routes"));
+//routes
+const note_route_1 = __importDefault(require("./routes/note.route"));
+const user_route_1 = __importDefault(require("./routes/user.route"));
+const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const error_middleware_1 = require("./middleware/error.middleware");
 const notFound_middleware_1 = require("./middleware/notFound.middleware");
 const app = express_1.default();
@@ -15,7 +18,9 @@ app.use(morgan_1.default('dev'));
 app.use(cors_1.default());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.json());
-app.use(note_routes_1.default);
+app.use(note_route_1.default);
+app.use(user_route_1.default);
+app.use(auth_route_1.default);
 app.get('/', (req, res) => {
     return res.send(`The API is at http://localhost:${app.get('port')}`);
 });

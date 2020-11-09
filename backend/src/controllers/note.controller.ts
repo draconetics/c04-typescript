@@ -4,7 +4,7 @@ import Note from "../models/note";
 import {INote} from '../interfaces/INote'
 import {INotes} from '../interfaces/INotes'
 import {HttpException} from '../common/HttpException'
-import { validate, validateParamId } from "./utils/note.utils";
+import { validate, validateParamId } from "./utils/note.util";
 import mongoose from 'mongoose';
 
 export const getNoteList = async (

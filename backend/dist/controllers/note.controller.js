@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteNoteById = exports.getNoteById = exports.createNote = exports.getNoteList = void 0;
 const note_1 = __importDefault(require("../models/note"));
 const HttpException_1 = require("../common/HttpException");
-const note_utils_1 = require("./utils/note.utils");
+const note_util_1 = require("./utils/note.util");
 const mongoose_1 = __importDefault(require("mongoose"));
 exports.getNoteList = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -33,7 +33,7 @@ exports.getNoteList = (req, res, next) => __awaiter(void 0, void 0, void 0, func
 });
 exports.createNote = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        note_utils_1.validate(req.body);
+        note_util_1.validate(req.body);
         const newNote = new note_1.default(req.body);
         yield newNote.save();
         res.status(201).json({ status: 201, message: "success", data: newNote });
@@ -46,7 +46,7 @@ exports.createNote = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
 });
 exports.getNoteById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        note_utils_1.validateParamId(req.params.id, next);
+        note_util_1.validateParamId(req.params.id, next);
         let id = mongoose_1.default.Types.ObjectId(req.params.id);
         const noteFound = yield note_1.default.findOne({ _id: id });
         if (noteFound)
@@ -61,7 +61,7 @@ exports.getNoteById = (req, res, next) => __awaiter(void 0, void 0, void 0, func
 });
 exports.deleteNoteById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        note_utils_1.validateParamId(req.params.id, next);
+        note_util_1.validateParamId(req.params.id, next);
         let id = mongoose_1.default.Types.ObjectId(req.params.id);
         const noteFound = yield note_1.default.findByIdAndRemove(id);
         //console.log(noteFound)
