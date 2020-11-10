@@ -1,34 +1,44 @@
 .todo-item{
-    min-width: 200px;
-    max-width: 500px;
-    padding: 1rem;
-    background-color: $primary;
-    margin:1rem auto;
-    text-align: center;
     display:flex;
     justify-content: center;
-    color:$white;
+    align-items: center;
+
+
+    .todo-item__label{
+        min-width: 300px;
+        max-width: 500px;
+        padding: 1rem;
+        background-color: $primary;
+        
+        text-align: center;
+        display:flex;
+        justify-content: center;
+        color:$white;
+        
     
-
-    .todo-item__text{
-        flex: 1;
+        .todo-item__text{
+            flex: 1;
+        }
+   
     }
-
+    
+    .todo-item__label.complete {
+        text-decoration: line-through;
+        background-color: $default;
+        color:$secundary;
+    }
+    
+    
     .todo-item__icon{
         cursor: pointer;
+        margin: 1.25rem .5rem;
+        color: $danger;
         opacity: 0;
-        transition: opacity 1s;
+        transition: opacity .6s;
     }
-
-    .todo-item__icon.show{
+    .todo-item__icon:hover,.todo-item__icon.show{
         opacity: 1;
     }
-}
-
-
-.todo-item.complete {
-    text-decoration: line-through;
-    background-color: $default;
-    color:$secundary;
+    
 }
 

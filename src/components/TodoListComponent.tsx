@@ -1,90 +1,94 @@
-import React, {useEffect, useState} from "react";
-//import { Todo, ToggleComplete } from "./types";
-import { TodoItemComponent } from "./TodoItemComponent";
-import noteService from "../services/NoteService"
-import AddTodoComponent from './AddTodoComponent'
+import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 
+interface IPropsTodoListComponent {
+    todoList:Todo[];
+    deleteTodo:(id:string)=>void;
+    toggleComplete:(index:number)=>void;
+}
 
-export const TodoListComponent: React.FC = () => {
-  const [todos, setTodos] = useState<Array<Todo>>([]);
-  const [errorTodos, setErrorTodos] = useState<string>("");
-  const [errorAddTodo, setErrorAddTodo] = useState<string>("");
-  const itemsRef = React.useRef([]);
-  useEffect(() => {
-    updateTodoList();
+interface IStateTodoListComponent {
+
+}
+
+class TodoListComponent extends React.Component<IPropsTodoListComponent, IStateTodoListComponent> {
+  
+  iconsRefList:Array<any>=[];  
+
+  constructor(props:IPropsTodoListComponent){
+    super(props);
+    console.log(this.props.todoList)
     
-}, [])
+  }
 
-const addTodo: AddTodo = newTodo => {
-  const todo = { text: newTodo, complete: false }
-  
-  
-  if(newTodo.trim() !== "")
-  noteService.createNote(todo)
-    .then(({data})=>{
-      console.log(data)
-      updateTodoList();
-      setErrorAddTodo("")
-    }).catch(e => {setErrorAddTodo("Error creating new note: "+e.message);})
-};
 
-const deleteTodo = (id:string) =>{
-    const newTodos = todos.filter(item=>(item._id!==id)?item:null);
-    setTodos(newTodos)
-}
-
-const showErrorGettingList = () =>{
-    if(errorTodos)
-    return <span>{errorTodos}</span>
+/*
+showErrorGettingList(){
+    if(this.state.errorTodos)
+    return <span>{this.state.errorTodos}</span>
     return null;
 }
 
-const showErrorAddingTodo = () => {
-    if(errorAddTodo)
-        return <span>{errorAddTodo}</span>
+showErrorAddingTodo (){
+    if(this.state.errorAddTodo)
+        return <span>{this.state.errorAddTodo}</span>
     return null;
 }
-
-const updateTodoList = () =>{
-  noteService.getList()
-      .then(({data})=>{
-        console.log(data)
-        setTodos(data.data)
-        itemsRef.current = itemsRef.current.slice(0, data.data.length);
-        setErrorTodos("")
-      }).catch(e => {setErrorTodos("Error getting todo list: " + e.message)})
+*/
+componentWillReceiveProps(nextProps:IPropsTodoListComponent) {
+  // You don't have to do this check first, but it can help prevent an unneeded render
+  console.log(nextProps.todoList.length,this.iconsRefList.length);
+  if (nextProps.todoList.length !== this.iconsRefList.length) {
+      const lenght = nextProps.todoList.length;
+      this.iconsRefList = Array.apply(null, Array(lenght)).map(function (x, i) { return React.createRef(); })
+  }
 }
-const toggleComplete: ToggleComplete = (index:number) => {
 
-    const cloneItem = {...todos[index],complete:!todos[index].complete}
-    const newTodos = todos.filter((item) =>{
-      if(cloneItem._id !== item._id)
-        return item;
-    }); 
-    if(cloneItem.complete)
-      newTodos.push(cloneItem);
-    else
-      newTodos.unshift(cloneItem);
-    setTodos(newTodos)
-};
+handleOnMouseOver(index:number){
+  if(this.iconsRefList[index])
+      this.iconsRefList[index].current.classList.add("show")
+}
 
+handleOnMouseOut(index:number){
+  if(this.iconsRefList[index])
+      this.iconsRefList[index].current.classList.remove("show")
+}
+    render(){
+      const todoList = this.props.todoList;
+      console.log(todoList);
+      console.log(this.iconsRefList)
+      
+      return (<ul data-test="TodoListComponent">
+          {todoList && todoList.map((item, index)=>{
+              return (
+                <li key={index} className="todo-item container" >
+                  <label 
+                      className={"todo-item__label " + (item.complete ? "complete" : "")} 
+                      onMouseOver={e=>this.handleOnMouseOver(index)}
+                      onMouseOut={e=>this.handleOnMouseOut(index)}>
+                    <input
+                      type="checkbox"
+                      onChange={() => this.props.toggleComplete(index)}
+                      checked={item.complete}
+                    />
+                    <span className="todo-item__text">{item.text}</span>
+                    
+                  </label>
+                  <span className="todo-item__icon"  
+                          ref={(ref)=>{if(this.iconsRefList[index])this.iconsRefList[index].current = ref}} 
+                          onClick={()=>this.props.deleteTodo(item._id||"")}
+                          >
+                      <FontAwesomeIcon icon={faWindowClose} size="2x"></FontAwesomeIcon>
+                    </span>
+                </li>
+              )
+          })}
+          
+        </ul>);
+    }
 
-  return (<>
-    {showErrorGettingList()}
-    <ul>
-      {todos && todos.map((todo, index) => (
-          <TodoItemComponent
-            key={index}
-            todo={todo}
-            toggleComplete={toggleComplete}
-            index={index}
-            itemsRef={itemsRef}
-            deleteTodo={deleteTodo}
-          />
-      ))}
-    </ul>
-    <AddTodoComponent addTodo={addTodo} />
-    {showErrorAddingTodo()}
-  </>);
-};
+}
+
+export default TodoListComponent;

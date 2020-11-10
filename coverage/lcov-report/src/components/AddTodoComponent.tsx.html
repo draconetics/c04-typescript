@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,22 +94,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,22 +124,22 @@ interface AddTodoFormProps {
   addTodo: AddTodo;
 }
 &nbsp;
-const AddTodoComponent: React.FC&lt;AddTodoFormProps&gt; = <span class="fstat-no" title="function not covered" >({</span> addTodo }) =&gt; {
-  const [newTodo, setNewTodo] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;("");</span>
+const AddTodoComponent: React.FC&lt;AddTodoFormProps&gt; = ({ addTodo }) =&gt; {
+  const [newTodo, setNewTodo] = useState&lt;string&gt;("");
 &nbsp;
-  const handleChange = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setNewTodo(e.target.value);</span>
+  const handleChange = (e: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setNewTodo(e.target.value);
   };
 &nbsp;
-  const handleSubmit = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: FormEvent&lt;HTMLButtonElement&gt;) =&gt; {</span>
+  const handleSubmit = <span class="fstat-no" title="function not covered" >(e</span>: FormEvent&lt;HTMLButtonElement&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
 <span class="cstat-no" title="statement not covered" >    addTodo(newTodo);</span>
 <span class="cstat-no" title="statement not covered" >    setNewTodo("");</span>
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;form&gt;
-      &lt;input type="text" value={newTodo} onChange={<span class="fstat-no" title="function not covered" >(e</span>)=&gt;<span class="cstat-no" title="statement not covered" >handleChange(e)}</span> /&gt;
+  return (
+    &lt;form data-test="AddTodoComponent"&gt;
+      &lt;input type="text" value={newTodo} onChange={(e)=&gt;handleChange(e)} /&gt;
       &lt;button type="submit" onClick={handleSubmit}&gt;
         Add Todo
       &lt;/button&gt;
@@ -154,7 +154,7 @@ export default AddTodoComponent;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Nov 07 2020 23:21:17 GMT-0400 (Bolivia Time)
+                at Tue Nov 10 2020 14:25:53 GMT-0400 (Bolivia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

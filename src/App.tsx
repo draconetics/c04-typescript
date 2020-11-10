@@ -1,7 +1,7 @@
 import React from "react";
 
-import { TodoListComponent } from "./components/TodoListComponent";
-import  NoteListComponent from "./components/NoteListComponent/";
+import TodoComponent from "./components/TodoComponent";
+import NoteListComponent from "./components/NoteListComponent/";
 import MenuComponent from "./components/MenuComponent"
 import LoginFormComponent from "./components/LoginFormComponent"
 import RegisterFormComponent from "./components/RegisterFormComponent"
@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <Switch>
             <Route exact path={["/","/home"]} component={HomePage}></Route>
             <Route path="/notelist" component={NoteListComponent}></Route>
-            <Route path="/todolist" component={TodoListComponent}></Route>
+            <Route path="/todolist" component={TodoComponent}></Route>
             <Route path="/login" component={LoginFormComponent}></Route>
             <Route path="/register" component={RegisterFormComponent}></Route>
             <Route path='/404' component={NotFoundPageComponent} />

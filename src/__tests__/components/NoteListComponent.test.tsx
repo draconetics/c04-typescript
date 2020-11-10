@@ -4,27 +4,7 @@ import { NoteListComponent } from '../../components/NoteListComponent/NoteListCo
 
 describe("#ListItemComponent",()=>{
     describe("checking PropTypes", ()=>{
-        /*
-        it('should NOT show a list because noteList:[]', ()=>{
-            const properties = {
-                noteList:[],
-                getNotes: jest.fn(),
-                error: "",
-                loading: true
-            }
-            const appWrapper = shallow(<NoteListComponent {...properties}/>)
-            const noteListComponent = appWrapper.find(`[data-test='NoteListComponent']`);
-            const alertError = appWrapper.find(`.alert`);
-            
-            //render
-            expect(noteListComponent).toHaveLength(1);
-            //no errors
-            expect(ale rtError).toHaveLength(0);
-            //show message is empty
-            expect(noteListComponent.text().includes('List is empty')).toBe(true);
-            //do not show items
-            expect(noteListComponent.contains('li')).toEqual(false);
-        })*/
+        
 
         it('should show TODO LIST and DONE LIST', ()=>{
             const properties = {

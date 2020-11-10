@@ -19,7 +19,7 @@ const AddTodoComponent: React.FC<AddTodoFormProps> = ({ addTodo }) => {
   };
 
   return (
-    <form>
+    <form data-test="AddTodoComponent">
       <input type="text" value={newTodo} onChange={(e)=>handleChange(e)} />
       <button type="submit" onClick={handleSubmit}>
         Add Todo

@@ -77,7 +77,7 @@ describe("#AddNoteComponent",()=>{
             appWrapper.find('.input-form').simulate('change', { target: { value: 'hola' } });
             expect(setEditedNoteFunc).toHaveBeenCalledTimes(1);//one event
 
-            const button = appWrapper.find('.btn.btn-success').simulate('click', fakeEvent);           
+            appWrapper.find('.btn.btn-success').simulate('click', fakeEvent);           
             expect(saveNoteFunc).toHaveBeenCalledTimes(1);
             //expect(updateActiveBoardArray).toHaveBeenCalledWith('X');
             //expect(changeTurn).toHaveBeenCalledTimes(1);
