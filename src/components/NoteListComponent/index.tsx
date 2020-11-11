@@ -5,19 +5,10 @@ import {getNotes} from '../../actions/noteAction'
 import {SET_NOTES} from '../../actions/types'
 //import * as actionCreators from '../../actions/noteAction'
 
-/*
-interface StateFromProps {
-  noteList: INote[]
-}
-
-interface DispatchFromProps {
-  getNotes: () => void;
-}*/
 
 const mapStateToProps = (state:any) =>{
       return {
           noteList: state.noteReducer.notes,
-          error: state.noteReducer.error,
           loading: state.noteReducer.loading
       }
   }

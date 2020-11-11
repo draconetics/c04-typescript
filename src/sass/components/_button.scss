@@ -5,12 +5,31 @@
 }
 
 .btn.btn-success{
+    background-color: $success;
+    color: $white;
+    border: none;
+}
+
+
+.btn.btn-success:hover{
+    background-color: rgba($success, .8);
+    cursor: pointer;
+}
+
+.btn.btn-primary{
     background-color: $primary;
     color: $white;
     border: none;
 }
 
-.btn.btn-success:hover{
+
+.btn.btn-primary:hover{
     background-color: rgba($primary, .8);
     cursor: pointer;
 }
+
+.disabled{
+    cursor: not-allowed;
+    pointer-events: none;
+}
+  

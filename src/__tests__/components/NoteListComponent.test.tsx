@@ -36,18 +36,18 @@ describe("#ListItemComponent",()=>{
             const properties = {
                 noteList:[],
                 getNotes: jest.fn(),
-                error: "Network error",
-                loading: true,
+                loading: false,
                 setNotes: jest.fn()
             }
             const appWrapper = shallow(<NoteListComponent {...properties}/>)
+
+            const setState = jest.fn();
+            const useStateSpy = jest.spyOn(React, 'useState')
+            useStateSpy.mockImplementation((init) => [init, setState]);
+
             const noteListComponent = appWrapper.find(`[data-test='NoteListComponent']`);
-            const alertError = appWrapper.find('.alert');
-            
-            
-            //render
             expect(noteListComponent).toHaveLength(1);
-            //no errors
+            const alertError = appWrapper.find('.alert');
             expect(alertError).toHaveLength(1);
             //show message is empty
             expect(noteListComponent.text().includes('Network error')).toBe(true);

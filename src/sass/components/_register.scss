@@ -1,0 +1,24 @@
+.register-container{
+    background-color: #f7f7f7;
+    padding: 2rem;
+    border: 1px solid rgba(0,0,0,.1);
+    height: auto;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.2);
+    border-radius: .2rem;
+    margin: 2rem auto;
+    position: relative;
+    text-align: left;
+
+    .register__logo{
+        width: 100%;
+        text-align: center;
+        margin: 1rem 0;
+
+        img{
+            width: 150px;
+            border-radius: 50%;
+        }
+    }
+}

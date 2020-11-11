@@ -18,17 +18,46 @@ interface INote{
     complete: boolean
 }
 
-type NoteState = {
-    notes: INote[],
-    loading: boolean,
-    error:string
+interface INoteStateReducer {
+    notes: INote[];
+    loading: boolean;
 }
 
-type NoteAction = {
+interface IActionReducer{
     type: string,
-    value: any   
+    value: any       
 }
 
 type AppDispatch = any
 type AddNote = (newNote: string) => void;
+/*** RegisterForm */
+interface IRegisterInput{
+    value:string;
+    touched:boolean;
+    msg:string;
+    isValidated:boolean;
+}
 
+interface IRegisterUser{
+    name:string;
+    email:string;
+    password:string;
+}
+interface IRegisterStateReducer{
+    status:string;
+    detail:string;
+    loading:boolean;
+}
+
+/*** authReducer */
+
+interface IAuthStateReducer{
+    loggedUser: any;
+    token: string;
+    authLoading: boolean;
+}
+
+interface IAuthUser{
+    email:string;
+    password: string;
+}

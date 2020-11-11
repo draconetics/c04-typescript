@@ -1,13 +1,12 @@
 import * as actionTypes from '../actions/types'
-const initialState:NoteState = {
+const initialState:INoteStateReducer = {
     notes:[],
-    loading:true,
-    error:""
+    loading:true
 }
 export const noteReducer = (
     state = initialState,
-    action: NoteAction
-  ): NoteState => {
+    action: IActionReducer
+  ): INoteStateReducer => {
     switch (action.type) {
         case actionTypes.SET_NOTES:
             return {
@@ -15,11 +14,10 @@ export const noteReducer = (
                 notes:action.value,
                 loading:false
             }
-        case actionTypes.SET_NOTES_ERROR:
+        case actionTypes.SET_NOTES_LOADING:
             return {
                 ...state,
-                error: action.value,
-                loading: false
+                loading: action.value
             }
         
         default: return state;

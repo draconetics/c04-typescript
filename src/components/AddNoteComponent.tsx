@@ -24,7 +24,7 @@ const AddNoteComponent : React.FC<AddNoteProps> =({editedNote, setEditedNote, sa
 
     return (<form className="note-board__add-note" data-test='AddNoteComponent'>
                 <input type="text" value={editedNote.text} onChange={e=>handleChange(e)} className="input-form"></input>  
-                <button type="submit" className="btn btn-success" onClick={(e)=>{e.preventDefault();saveNote()}}>{editMode?"Save":"Add New Note"}</button>
+                <button type="submit" className="btn btn-primary" onClick={(e)=>{e.preventDefault();saveNote()}}>{editMode?"Save":"Add New Note"}</button>
                 {cancelButton()}
             </form>);
 }

@@ -45,6 +45,25 @@ describe("#noteReducer integration testing", ()=>{
                             }) 
             
         });//ent It
+
+        it('Store is cannot connectoto internet', () => {
+    
+    
+            moxios.stubRequest(/.*/, {
+                status: 500,
+                response: { message: 'error server' }
+              });
+              
+            /*
+            store.dispatch<any>(getNotes())
+                            .then(() => {
+                                const newState = store.getState()
+                                //console.log(newState)
+                                expect(newState.noteReducer.notes).toBe(expectedState);
+                            }) 
+                            */
+            
+        });//ent It
     
     });//end describe
 }) //end describe

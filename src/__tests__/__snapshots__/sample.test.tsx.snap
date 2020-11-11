@@ -3,10 +3,18 @@
 exports[`#App component show App component 1`] = `
 <Fragment>
   <BrowserRouter>
-    <MenuComponent />
+    <Connect(MenuComponent) />
     <Switch>
       <Route
-        component={[Function]}
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(HomeComponent)",
+            "type": [Function],
+          }
+        }
         exact={true}
         path={
           Array [
@@ -32,11 +40,27 @@ exports[`#App component show App component 1`] = `
         path="/todolist"
       />
       <Route
-        component={[Function]}
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(LoginForm)",
+            "type": [Function],
+          }
+        }
         path="/login"
       />
       <Route
-        component={[Function]}
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(RegisterFormComponent)",
+            "type": [Function],
+          }
+        }
         path="/register"
       />
       <Route

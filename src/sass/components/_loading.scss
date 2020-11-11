@@ -1,7 +1,15 @@
+.loading-container{
+  flex:1;
+  background-color: rgba($default,.3);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .note-board__loading {
     border: 5px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 5px solid rgba(240, 128, 128, .5);
+    border-top: 5px solid $success;
     width: 60px;
     height: 60px;
     -webkit-animation: spin 1.5s linear infinite; /* Safari */
