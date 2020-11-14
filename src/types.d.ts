@@ -19,7 +19,8 @@ interface INote{
 }
 
 interface INoteStateReducer {
-    notes: INote[];
+    notesDone: INote[];
+    notesDo: INote[];
     loading: boolean;
 }
 

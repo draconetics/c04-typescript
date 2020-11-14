@@ -1,5 +1,10 @@
-export const SET_NOTES = "SET_NOTES";
+export const SET_NOTES_DO = "SET_NOTES_DO";
+export const SET_NOTES_DONE = "SET_NOTES_DONE";
 export const SET_NOTES_LOADING = "SET_NOTES_LOADING";
+export const SAVE_NOTE_DO_LIST = "SAVE_NOTE_DO_LIST";
+export const CREATE_NOTE_DO_LIST = "CREATE_NOTE_DO_LIST"
+export const DELETE_NOTE = "DELETE_NOTE"
+
 
 export const REG_SET_STATUS = "REG_SET_STATUS";
 export const REG_SET_DETAIL = "REG_SET_DETAIL";

@@ -10,18 +10,28 @@ export const reorder = (list:INote[], startIndex:number, endIndex:number) => {
 /**
  * Moves an item from one list to another list.
  */
-export const move = (source:INote[], destination:INote[], droppableSource:any, droppableDestination:any) => {
+export const move = (
+        source:INote[], 
+        destination:INote[], 
+        droppableSource:any, 
+        droppableDestination:any,
+        saveNote:any) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
 
     destClone.splice(droppableDestination.index, 0, removed);
 
+    let resp = null;
     if(droppableSource.droppableId === "droppable"){
-        return {"droppable":sourceClone,"droppable2":destClone};    
+        removed.complete = true;
+        resp = {"droppable":sourceClone,"droppable2":destClone};    
     }else{
-        return {"droppable":destClone,"droppable2":sourceClone};    
+        removed.complete = false;
+        resp = {"droppable":destClone,"droppable2":sourceClone};    
     }
+    saveNote(removed);
+    return resp;
 };
 
 const grid = 8;

@@ -7,16 +7,20 @@ import {reorder, move, getListStyle, getDoneListStyle, getItemStyle, getDoneItem
 import LoadingComponent from '../LoadingComponent';
 
 interface IPropsNoteListComponent {
-    noteList: INote[],
-    getNotes: () => Promise<void>,
-    loading: boolean,
-    setNotes: (data:INote[])=> void
+    notesDone: INote[];
+    notesDo: INote[];
+    loading: boolean;
+    getNotes: () => Promise<void>;
+    setNotesDo: (data:INote[])=> void;
+    setNotesDone: (data:INote[])=> void;
+    saveNoteDoList:(data:INote)=> void;
+    createNoteDoList:(data:INote)=> void;
+    deleteNote: (data:INote)=>void;
   }
 
   interface IStateNoteListComponent{
       editedNote:any;
       editMode:boolean;
-      noteDoneList:INote[];
       errorGettingList:string;
   }
 
@@ -27,7 +31,6 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
         this.state = {
             editedNote:this.getDefaultNote(),
             editMode:false,
-            noteDoneList:[],
             errorGettingList:""
         };
         this.onDragEnd = this.onDragEnd.bind(this);
@@ -48,18 +51,21 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
     componentDidMount(){
         this.getNotes()
     }
-    //warning with hooks
+
+
+
     getNotes = ()=>{
-        this.props.getNotes().catch(e=>{
-            this.setState({
-                errorGettingList:"Error getting List from the server: " + e.message
+        this.props.getNotes()
+            .catch(e=>{
+                this.setState({
+                    errorGettingList:"Error getting List from the server: " + e.message
             });
         });
     } 
-    
+
 
     editNote(id:string){
-        const found = this.props.noteList.find(item => item._id === id);
+        const found = this.props.notesDo.find(item => item._id === id);
         if(found){
             this.setState({
                 editedNote:found,
@@ -73,34 +79,23 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
         if(this.state.editedNote.text.trim() === "")
             return;
         if(this.state.editMode){
-            const newList = this.props.noteList.map((item)=>{
-                        if(item._id === this.state.editedNote._id)
-                            item.text = this.state.editedNote.text
-                        return item;
-                    });
-            this.props.setNotes(newList)
+            this.props.saveNoteDoList(this.state.editedNote)
             this.setState({
                 editMode:false
             })
             
         }else{
-            this.props.setNotes([...this.props.noteList, this.state.editedNote])
+            this.props.createNoteDoList(this.state.editedNote)
         }
         this.setState({
             editedNote:this.getDefaultNote()
         });
     }
 
-    deleteNote(id:string){
-    
-        let newList = this.props.noteList.filter(item=>item._id !== id?item:null);
-        this.props.setNotes(newList)
-        newList = this.state.noteDoneList.filter(item=>item._id !== id?item:null);
-
-        this.setState({
-            noteDoneList:newList
-        });
+    deleteNote(note:INote){
+        this.props.deleteNote(note);
     }
+
 
     cancel(){
         this.setState({
@@ -126,9 +121,9 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
     
     droppableIdToList(id:string){
         if(id === "droppable")
-            return this.props.noteList;
+            return this.props.notesDo;
         else
-            return this.state.noteDoneList;
+            return this.props.notesDone;
     }
 
     onDragEnd(result:DropResult){
@@ -145,20 +140,11 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                 source.index,
                 destination.index
             );
-/*
-            let state = { ...list, items:orderedItems };
 
             if (source.droppableId === 'droppable2') {
-                state = { ...list, doneItems: orderedItems };
-            }
-            setList(state);
-        */
-            if (source.droppableId === 'droppable2') {
-                this.setState({
-                    noteDoneList:orderedItems
-                });
+                this.props.setNotesDone(orderedItems)
             }else{
-                this.props.setNotes(orderedItems)
+                this.props.setNotesDo(orderedItems)
             }
             
         } else {
@@ -166,18 +152,12 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                 this.droppableIdToList(source.droppableId),
                 this.droppableIdToList(destination.droppableId),
                 source,
-                destination
+                destination,
+                this.props.saveNoteDoList
             );
-/*
-            setList({
-                items: result.droppable,
-                doneItems: result.droppable2
-            });*/
-            this.props.setNotes(result.droppable)
-            this.setState({
-                noteDoneList:result.droppable2
-            });
-            
+
+            this.props.setNotesDo(result.droppable)
+            this.props.setNotesDone(result.droppable2)
         }
     };
 
@@ -190,8 +170,8 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                 <div
                     ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}>
-                    {this.showAlertEmptyList(this.props.noteList)} 
-                    {this.props.noteList.map((item, index) => (
+                    {this.showAlertEmptyList(this.props.notesDo)} 
+                    {this.props.notesDo.map((item, index) => (
                         <Draggable
                             key={item._id}
                             draggableId={item._id}
@@ -209,7 +189,7 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                                     <FontAwesomeIcon icon={faExpandArrowsAlt} size="2x"/>
                                     <span className="note-board__item__text">{item.text}</span>
                                     <FontAwesomeIcon icon={faPenSquare}  size="2x" onClick={()=>this.editNote(item._id)} className="note-board__icon"/>
-                                    <FontAwesomeIcon icon={faWindowClose}  size="2x" onClick={()=>this.deleteNote(item._id)} className="note-board__icon"/>
+                                    <FontAwesomeIcon icon={faWindowClose}  size="2x" onClick={()=>this.deleteNote(item)} className="note-board__icon"/>
                                 </div>
                                 
                             )}
@@ -231,8 +211,8 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                         data-test="div"
                         ref={provided.innerRef}
                         style={getDoneListStyle(snapshot.isDraggingOver)}>
-                        {this.showAlertEmptyList(this.state.noteDoneList)}      
-                        {this.state.noteDoneList.map((item, index) => (
+                        {this.showAlertEmptyList(this.props.notesDone)}      
+                        {this.props.notesDone.map((item, index) => (
                             <Draggable
                                 key={item._id}
                                 draggableId={item._id}
@@ -247,7 +227,7 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                                             provided.draggableProps.style
                                         )}>
                                         <span className="note-board__item__text">{item.text}</span>
-                                        <FontAwesomeIcon icon={faWindowClose}  size="2x" onClick={()=>this.deleteNote(item._id)} className="note-board__icon"/>
+                                        <FontAwesomeIcon icon={faWindowClose}  size="2x" onClick={()=>this.deleteNote(item)} className="note-board__icon"/>
                                     </div>
                                 )}
                             </Draggable>
@@ -266,6 +246,7 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
     }
 
     renderComponent (){
+        
         return (<div data-test="NoteListComponent">
                 <div className="note-board container">
 

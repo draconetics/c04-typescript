@@ -33,7 +33,7 @@ describe("#AddNoteComponent",()=>{
             const appWrapper = shallow(<AddNoteComponent {...properties}/>)
             const addNoteComponent = appWrapper.find(`[data-test='AddNoteComponent']`);
             expect(addNoteComponent).toHaveLength(1);
-            const saveButton = appWrapper.find('.btn.btn-success');           
+            const saveButton = appWrapper.find('.btn').first();           
             expect(saveButton.text()).toBe('Save');
             const cancelButton = appWrapper.find('.btn').at(1);           
             expect(cancelButton.text()).toBe('Cancel');
@@ -52,7 +52,7 @@ describe("#AddNoteComponent",()=>{
             const appWrapper = shallow(<AddNoteComponent {...properties}/>)
             const addNoteComponent = appWrapper.find(`[data-test='AddNoteComponent']`);
             expect(addNoteComponent).toHaveLength(1);
-            const button = appWrapper.find('.btn.btn-success');           
+            const button = appWrapper.find('.btn');           
             expect(button.text()).toBe('Add New Note');
             
             const inputText = appWrapper.find('.input-form'); 
@@ -77,7 +77,7 @@ describe("#AddNoteComponent",()=>{
             appWrapper.find('.input-form').simulate('change', { target: { value: 'hola' } });
             expect(setEditedNoteFunc).toHaveBeenCalledTimes(1);//one event
 
-            appWrapper.find('.btn.btn-success').simulate('click', fakeEvent);           
+            appWrapper.find('.btn').simulate('click', fakeEvent);           
             expect(saveNoteFunc).toHaveBeenCalledTimes(1);
             //expect(updateActiveBoardArray).toHaveBeenCalledWith('X');
             //expect(changeTurn).toHaveBeenCalledTimes(1);

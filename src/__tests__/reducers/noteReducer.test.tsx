@@ -7,8 +7,7 @@ describe('#notesReducer', ()=>{
         it('Should return default state', (done) => {
             const initialState = {
                 notes:[],
-                loading:true,
-                error:""
+                loading:false,
             }
             const newState = noteReducer(undefined, {type:"",value:[]});
             expect(newState).toEqual(initialState);
@@ -21,7 +20,6 @@ describe('#notesReducer', ()=>{
             const resultState = {
                 notes:noteList,
                 loading:false,
-                error:""
             }
             const newState = noteReducer(undefined, {
                 type: actionTypes.SET_NOTES,

@@ -14,8 +14,8 @@ if( localStorage.getItem('loggedUser') &&
     }
 
 export const authReducer = (state = init, action:IActionReducer) => {
-    console.log("this is the action.value")
-    console.log(action.value)
+    //console.log("this is the action.value")
+    //console.log(action.value)
       switch (action.type) {
         case actionType.SET_LOGGED_USER:
           return {...state, loggedUser:action.value};

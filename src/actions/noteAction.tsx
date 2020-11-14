@@ -1,4 +1,4 @@
-import {SET_NOTES, SET_NOTES_LOADING} from './types'
+import {SET_NOTES_DO, SET_NOTES_DONE, SET_NOTES_LOADING} from './types'
 import noteService from '../services/NoteService'
 
 export const getNotes = () =>(dispatch:AppDispatch) =>{
@@ -9,10 +9,7 @@ export const getNotes = () =>(dispatch:AppDispatch) =>{
         return noteService.getList()
             .then(resp => {
                 // dispatch
-                dispatch({
-                    type: SET_NOTES,
-                    value: resp.data.data
-                });
+                createLists(resp.data.data, dispatch)
                 dispatch({
                     type: SET_NOTES_LOADING,
                     value: false
@@ -26,3 +23,24 @@ export const getNotes = () =>(dispatch:AppDispatch) =>{
             });
     };//end getNotes
   
+
+    const createLists = (noteList:INote[], dispatch:any) =>{
+        const listDo:INote[] = [];
+        const listDone:INote[] = [];
+        noteList.map((item)=>{
+            if(item.complete === true)
+                listDone.push(item);
+            else
+                listDo.push(item);
+        });
+        
+        dispatch({
+            type: SET_NOTES_DONE,
+            value: listDone
+        });
+        dispatch({
+            type: SET_NOTES_DO,
+            value: listDo
+        });   
+        
+    }
