@@ -19,7 +19,6 @@ const AddNoteComponent : React.FC<AddNoteProps> =({editedNote, setEditedNote, sa
     const cancelButton = ()=>{
         if(editMode)
             return (<button type="button" className="btn" onClick={()=>{cancel()}}>Cancel</button>)
-        return null;
     }
 
     return (<form className="note-board__add-note" data-test='AddNoteComponent'>

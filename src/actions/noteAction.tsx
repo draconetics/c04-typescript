@@ -1,4 +1,4 @@
-import {SET_NOTES_DO, SET_NOTES_DONE, SET_NOTES_LOADING} from './types'
+import {SET_NOTES_DO, SET_NOTES_DONE, SET_NOTES_ERROR, SET_NOTES_LOADING} from './types'
 import noteService from '../services/NoteService'
 
 export const getNotes = () =>(dispatch:AppDispatch) =>{
@@ -8,18 +8,29 @@ export const getNotes = () =>(dispatch:AppDispatch) =>{
         });
         return noteService.getList()
             .then(resp => {
+                
+                //console.log(resp);
                 // dispatch
                 createLists(resp.data.data, dispatch)
+                
                 dispatch({
                     type: SET_NOTES_LOADING,
                     value: false
+                });
+                dispatch({
+                    type: SET_NOTES_ERROR,
+                    value: ""
                 });
             }).catch((e)=>{
+                //console.log("entra a catcher")
                 dispatch({
                     type: SET_NOTES_LOADING,
                     value: false
                 });
-                throw e;
+                dispatch({
+                    type: SET_NOTES_ERROR,
+                    value: "Error getting data from the server: " + e.message
+                });
             });
     };//end getNotes
   

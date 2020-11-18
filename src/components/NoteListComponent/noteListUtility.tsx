@@ -14,23 +14,20 @@ export const move = (
         source:INote[], 
         destination:INote[], 
         droppableSource:any, 
-        droppableDestination:any,
-        saveNote:any) => {
+        droppableDestination:any) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
-
+    removed.complete = !removed.complete;
     destClone.splice(droppableDestination.index, 0, removed);
 
     let resp = null;
     if(droppableSource.droppableId === "droppable"){
-        removed.complete = true;
         resp = {"droppable":sourceClone,"droppable2":destClone};    
     }else{
-        removed.complete = false;
         resp = {"droppable":destClone,"droppable2":sourceClone};    
     }
-    saveNote(removed);
+
     return resp;
 };
 

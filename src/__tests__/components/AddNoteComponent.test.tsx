@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { isGetAccessor } from 'typescript';
 import  AddNoteComponent  from '../../components/AddNoteComponent';
 
 describe("#AddNoteComponent",()=>{
@@ -82,6 +83,25 @@ describe("#AddNoteComponent",()=>{
             //expect(updateActiveBoardArray).toHaveBeenCalledWith('X');
             //expect(changeTurn).toHaveBeenCalledTimes(1);
 
+        })
+
+        it('should call cancel event when cancel button is clicked', ()=>{
+            const spyCancel = jest.fn();
+            const properties = {
+                editedNote: {_id:"123456789abcdef",text:"another text", complete: false},
+                setEditedNote: jest.fn(),
+                saveNote: jest.fn(),
+                editMode:true,
+                cancel: spyCancel
+            }
+            const appWrapper = shallow(<AddNoteComponent {...properties}/>)
+            
+            const saveButton = appWrapper.find('.btn').first();           
+            expect(saveButton.text()).toBe('Save');
+            const cancelButton = appWrapper.find('.btn').at(1);           
+            expect(cancelButton.text()).toBe('Cancel');
+            cancelButton.simulate('click')
+            expect(spyCancel).toHaveBeenCalledTimes(1);
         })
 
 

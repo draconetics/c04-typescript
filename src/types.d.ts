@@ -22,6 +22,7 @@ interface INoteStateReducer {
     notesDone: INote[];
     notesDo: INote[];
     loading: boolean;
+    notesError: string;
 }
 
 interface IActionReducer{
@@ -56,6 +57,7 @@ interface IAuthStateReducer{
     loggedUser: any;
     token: string;
     authLoading: boolean;
+    loggedError:string;
 }
 
 interface IAuthUser{

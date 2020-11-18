@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.29% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -78,24 +78,22 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -104,20 +102,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import userService from '../services/UserService'
 import * as actionTypes from './types'
 &nbsp;
-export const createUser = <span class="fstat-no" title="function not covered" >(d</span>ata:IRegisterUser) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(d</span>ispatch:AppDispatch) =&gt;{</span>
-<span class="cstat-no" title="statement not covered" >    return userService.createUser(data)</span>
-        .then(<span class="fstat-no" title="function not covered" >re</span>sp =&gt; {
+export const createUser = (data:IRegisterUser) =&gt; (dispatch:AppDispatch) =&gt;{
+    return userService.createUser(data)
+        .then(resp =&gt; {
             // dispatch
-<span class="cstat-no" title="statement not covered" >            console.log(resp)</span>
-<span class="cstat-no" title="statement not covered" >            dispatch([</span>
-                {type: actionTypes.REG_SET_STATUS, value: "success"},
-                {type: actionTypes.REG_SET_LOADING, value: false},
-            ]);
+            //console.log("register action")
+            //console.log(resp);
+            dispatch({type: actionTypes.REG_SET_STATUS, value: "success"});
+            dispatch({type: actionTypes.REG_SET_LOADING, value: false});
             
-        }).catch(<span class="fstat-no" title="function not covered" >(e</span>)=&gt;{
-<span class="cstat-no" title="statement not covered" >            console.log("catching error")</span>
-<span class="cstat-no" title="statement not covered" >            console.log(e.message)</span>
-<span class="cstat-no" title="statement not covered" >            dispatch({</span>
+        }).catch((e)=&gt;{
+            //console.log("catching error")
+            //console.log(e.message)
+            dispatch({
                 type: actionTypes.REG_SET_STATUS,
                 value: e.message
             })
@@ -130,7 +127,7 @@ export const createUser = <span class="fstat-no" title="function not covered" >(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 13 2020 13:13:19 GMT-0400 (Bolivia Time)
+                at Tue Nov 17 2020 16:50:37 GMT-0400 (Bolivia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

@@ -63,7 +63,7 @@ export default class TodoComponent extends React.Component<IPropsTodoComponent,I
     }
 
     toggleComplete(index:number){
-
+/*
         const cloneItem = {...this.state.todoList[index],complete:!this.state.todoList[index].complete}
         const newTodos = this.state.todoList.filter((item:Todo) =>{
           if(cloneItem._id !== item._id)
@@ -75,25 +75,44 @@ export default class TodoComponent extends React.Component<IPropsTodoComponent,I
           newTodos.unshift(cloneItem);
         this.setState({
             todoList: newTodos
+        })*/
+        
+        let newList = Array.from(this.state.todoList);
+      
+        const [removed] = newList.splice(index,1)
+      
+        removed.complete = !removed.complete;
+        
+        if(removed.complete === true)
+          newList.push(removed);
+        else
+          newList.unshift(removed)
+
+      
+        this.setState({
+          todoList:newList
         })
     };
 
     updateTodoList(){
-        noteService.getList()
-            .then(({data})=>{
-              console.log(data)
-              
-              this.setState({
-                todoList:data.data,
-                errorTodoList: ""
-              });
-              
+      //console.log("updatetodolist")
+      
+        return noteService.getList()
+            .then((resp)=>{
+                this.setState({
+                    todoList:resp.data.data,
+                    errorTodoList:""
+                })
+                
             })
-            .catch(e => {
-              this.setState({
-                errorTodoList:"Error getting todo list: " + e.message
-              })
-           })
+            .catch(e=>{
+                this.setState({
+                    errorTodoList:"Error getting todo list: " + e.message
+                })
+            })
+          
+      
+      
       }
 
     showErrorGettingList(){

@@ -3,15 +3,15 @@ import {NavLink} from 'react-router-dom'
 
 
 interface IPropsMenuComponent {
-    authLoading: boolean,
-    token: string,
-    logout: ()=> Promise<void>
+    authLoading: boolean;
+    token: string;
+    logout: ()=> Promise<void>;
 }
 
 
 const MenuComponent:React.FC<IPropsMenuComponent> = (props)=>{
-    console.log(props.token);
-    return (<nav>
+    //console.log(props.token);
+    return (<nav data-test="MenuComponent">
         <div className="main-nav container">
             <div className="logo">TodoWeb</div>
             <ul className="main-menu">

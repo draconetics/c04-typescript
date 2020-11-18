@@ -4,12 +4,11 @@ import { Redirect, RouteComponentProps  } from 'react-router-dom'
 interface IPropsRegisterFormComponent extends RouteComponentProps<any>{
     status:string,
     loading: boolean,
-    isLogged: boolean,
     createUser: (data:IRegisterUser)=> Promise<void>
   }
 
 
-export const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
+const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
 
    
     const inputInit = {
@@ -24,9 +23,9 @@ export const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (prop
     const [password2, setPassword2] = useState(inputInit);
     
     //logged user should not access to     
-    if (props.isLogged === true) {
+/*     if (props.isLogged === true) {
         return <Redirect to="/" />;
-    }
+    } */
 
     const validateUsername = (inputUsername:any)=>{
         let error = "";

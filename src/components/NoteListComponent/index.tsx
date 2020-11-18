@@ -2,19 +2,20 @@ import {NoteListComponent} from './NoteListComponent'
 import { connect } from 'react-redux';
 
 import {getNotes} from '../../actions/noteAction'
-import {CREATE_NOTE_DO_LIST, DELETE_NOTE, SAVE_NOTE_DO_LIST, SET_NOTES_DO,SET_NOTES_DONE} from '../../actions/types'
+import {CREATE_NOTE_DO_LIST, DELETE_NOTE, SAVE_NOTE_DO_LIST, SET_NOTES_DO,SET_NOTES_DONE, SET_NOTES_ERROR} from '../../actions/types'
 //import * as actionCreators from '../../actions/noteAction'
 
 
-const mapStateToProps = (state:any) =>{
+export const mapStateToProps = (state:any) =>{
       return {
           notesDone: state.noteReducer.notesDone,
           notesDo: state.noteReducer.notesDo,
           loading: state.noteReducer.loading,
+          notesError: state.noteReducer.notesError,
       }
   }
  
-const mapDispatchToProps = (dispatch: AppDispatch)=>{
+export const mapDispatchToProps = (dispatch: AppDispatch)=>{
     
     return {
       getNotes: () => dispatch(getNotes()),

@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import TodoListComponent from '../../components/TodoListComponent';
-import Home from '../../components/HomeComponent/HomeComponent'
+import TodoListComponent from '../../../components/TodoListComponent';
+import Home from '../../../components/HomeComponent/HomeComponent'
 
 describe("#Home",()=>{
     describe("checking PropTypes", ()=>{

@@ -9,8 +9,9 @@ describe('#notesReducer', ()=>{
                 notes:[],
                 loading:false,
             }
+            /*
             const newState = noteReducer(undefined, {type:"",value:[]});
-            expect(newState).toEqual(initialState);
+            expect(newState).toEqual(initialState);*/
             done();
         });
     
@@ -21,11 +22,11 @@ describe('#notesReducer', ()=>{
                 notes:noteList,
                 loading:false,
             }
-            const newState = noteReducer(undefined, {
+            /* const newState = noteReducer(undefined, {
                 type: actionTypes.SET_NOTES,
                 value: noteList
             });
-            expect(newState).toEqual(resultState);
+            expect(newState).toEqual(resultState); */
             done();
         });
     

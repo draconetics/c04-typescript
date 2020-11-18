@@ -17,29 +17,9 @@ class TodoListComponent extends React.Component<IPropsTodoListComponent, IStateT
   
   iconsRefList:Array<any>=[];  
 
-  constructor(props:IPropsTodoListComponent){
-    super(props);
-    console.log(this.props.todoList)
-    
-  }
-
-
-/*
-showErrorGettingList(){
-    if(this.state.errorTodos)
-    return <span>{this.state.errorTodos}</span>
-    return null;
-}
-
-showErrorAddingTodo (){
-    if(this.state.errorAddTodo)
-        return <span>{this.state.errorAddTodo}</span>
-    return null;
-}
-*/
 componentWillReceiveProps(nextProps:IPropsTodoListComponent) {
   // You don't have to do this check first, but it can help prevent an unneeded render
-  console.log(nextProps.todoList.length,this.iconsRefList.length);
+  
   if (nextProps.todoList.length !== this.iconsRefList.length) {
       const lenght = nextProps.todoList.length;
       this.iconsRefList = Array.apply(null, Array(lenght)).map(function (x, i) { return React.createRef(); })
@@ -57,8 +37,8 @@ handleOnMouseOut(index:number){
 }
     render(){
       const todoList = this.props.todoList;
-      console.log(todoList);
-      console.log(this.iconsRefList)
+      //console.log(todoList);
+      //console.log(this.iconsRefList)
       
       return (<ul data-test="TodoListComponent">
           {todoList && todoList.map((item, index)=>{

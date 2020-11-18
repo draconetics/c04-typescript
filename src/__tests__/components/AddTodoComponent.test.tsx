@@ -30,6 +30,23 @@ describe("#AddTodoComponent",()=>{
             expect(setNewTodo).toBeTruthy();
             done();
         })
+
+        it("should call addTodo function when it is clicked on 'Add Todo' button",(done)=>{
+            const spyAddTodo = jest.fn();
+            const appWrapper = shallow(<AddTodoComponent addTodo={spyAddTodo}/>)
+            
+            const setNewTodo = jest.fn();
+            const handleClick = jest.spyOn(React, "useState");
+            handleClick.mockImplementation(() => ["", setNewTodo]);
+            
+            appWrapper.find('button').simulate('click',{ 
+                preventDefault: () => {
+                }
+               });
+            expect(spyAddTodo).toHaveBeenCalledTimes(1);
+            expect(setNewTodo).toBeTruthy();
+            done();
+        })
     });
 
 });

@@ -1,4 +1,4 @@
-import { mount, shallow } from 'enzyme';
+import { mount, render, shallow } from 'enzyme';
 import React from 'react';
 import TodoListComponent from '../../components/TodoListComponent';
 
@@ -63,6 +63,9 @@ describe("#TodoListComponent",()=>{
             
         })
 
+        
+
+
         it("should change on mouse out",()=>{
             const handleOnMouseOutFunc = jest.spyOn(TodoListComponent.prototype, 'handleOnMouseOut');
             const appWrapper = shallow(<TodoListComponent {...todoProps}/>);
@@ -71,7 +74,7 @@ describe("#TodoListComponent",()=>{
             
         })
 
-        it('should update global var is props.todoList was changed',(done)=>{
+        it('should update global var if props.todoList was changed',(done)=>{
             expect(appInstance).toBeTruthy();   
             const newProps = {
                 todoList:[{_id:"123lklkfasjsak",text:"sample",complete:false},{_id:"123lksdfl21312jsak",text:"another sample",complete:true}],

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.56% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.77% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/13</span>
+                <span class='fraction'>8/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.56% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
@@ -87,33 +87,41 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,7 +129,8 @@
 let init:IAuthStateReducer = {
     loggedUser: null,
     token: "",
-    authLoading: false
+    authLoading: false,
+    loggedError: ""
 }
 &nbsp;
 <span class="missing-if-branch" title="if path not taken" >I</span>if( localStorage.getItem('loggedUser') &amp;&amp; 
@@ -129,21 +138,24 @@ let init:IAuthStateReducer = {
 <span class="cstat-no" title="statement not covered" >    init={</span>
         loggedUser: JSON.parse(localStorage.getItem('loggedUser')||""),
         token: localStorage.getItem('token')|| "",
-        authLoading: false
+        authLoading: false,
+        loggedError:""
     }
 &nbsp;
 export const authReducer = (state = init, action:IActionReducer) =&gt; {
     //console.log("this is the action.value")
     //console.log(action.value)
       switch (action.type) {
-<span class="branch-0 cbranch-no" title="branch not covered" >        case actionType.SET_LOGGED_USER:</span>
-<span class="cstat-no" title="statement not covered" >          return {...state, loggedUser:action.value};</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >        case actionType.SET_TOKEN:</span>
-<span class="cstat-no" title="statement not covered" >            return {...state, token: action.value}</span>
-<span class="branch-2 cbranch-no" title="branch not covered" >        case actionType.SET_AUTH_LOADING:</span>
-<span class="cstat-no" title="statement not covered" >            return {...state, authLoading: action.value}</span>
+        case actionType.SET_LOGGED_USER:
+            return {...state, loggedUser:action.value};
+        case actionType.SET_TOKEN:
+            return {...state, token: action.value}
+        case actionType.SET_AUTH_LOADING:
+            return {...state, authLoading: action.value}
+        case actionType.SET_LOGGED_ERROR:
+            return {...state, loggedError: action.value}
         default:
-          return state
+            return state
       }
     }
     
@@ -154,7 +166,7 @@ export const authReducer = (state = init, action:IActionReducer) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 13 2020 13:13:19 GMT-0400 (Bolivia Time)
+                at Tue Nov 17 2020 16:50:37 GMT-0400 (Bolivia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

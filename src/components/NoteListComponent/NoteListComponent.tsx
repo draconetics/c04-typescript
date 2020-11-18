@@ -10,6 +10,7 @@ interface IPropsNoteListComponent {
     notesDone: INote[];
     notesDo: INote[];
     loading: boolean;
+    notesError: string;
     getNotes: () => Promise<void>;
     setNotesDo: (data:INote[])=> void;
     setNotesDone: (data:INote[])=> void;
@@ -49,19 +50,8 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
     };
 
     componentDidMount(){
-        this.getNotes()
-    }
-
-
-
-    getNotes = ()=>{
         this.props.getNotes()
-            .catch(e=>{
-                this.setState({
-                    errorGettingList:"Error getting List from the server: " + e.message
-            });
-        });
-    } 
+    }
 
 
     editNote(id:string){
@@ -105,8 +95,8 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
     }
 
     showErrorGettingNotes(){
-        if(this.state.errorGettingList){
-            return (<span className="alert alert-danger">{this.state.errorGettingList}</span>)
+        if(this.props.notesError){
+            return (<span className="alert alert-danger">{this.props.notesError}</span>)
         }
         return null;
     }
@@ -114,8 +104,6 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
     showAlertEmptyList(list:INote[]){
         if(list.length === 0)
             return (<span>List is Empty</span>)
-        else
-            return null;
     }
 
     
@@ -152,8 +140,7 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
                 this.droppableIdToList(source.droppableId),
                 this.droppableIdToList(destination.droppableId),
                 source,
-                destination,
-                this.props.saveNoteDoList
+                destination
             );
 
             this.props.setNotesDo(result.droppable)
@@ -265,6 +252,8 @@ export class NoteListComponent extends React.Component<IPropsNoteListComponent,I
         </div>);
     }
     render(){
+        //console.log(this.props.notesDo);
+        //console.log(this.props.notesDone);
         return <>{this.props.loading===true?<LoadingComponent/>:this.renderComponent()}</>;
     }
     

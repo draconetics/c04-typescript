@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/types'
 const initialState:INoteStateReducer = {
     notesDo:[],
     notesDone:[],
-    loading:false
+    loading:false,
+    notesError:""
 }
 export const noteReducer = (
     state = initialState,
@@ -23,6 +24,11 @@ export const noteReducer = (
             return {
                 ...state,
                 loading: action.value
+            }
+        case actionTypes.SET_NOTES_ERROR:
+            return {
+                ...state,
+                notesError: action.value
             }
         
         case actionTypes.SAVE_NOTE_DO_LIST:         

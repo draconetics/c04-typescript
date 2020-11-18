@@ -1,45 +1,41 @@
 import React, {useState} from 'react'
-import { Redirect, RouteComponentProps } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LoadingComponent from '../LoadingComponent';
 
-interface IProsLoginFrom extends RouteComponentProps<any>{
+interface IProsLoginFrom {
     login:(data:IAuthUser)=>Promise<void>;
     authLoading:boolean;
+    loggedError:string;
 }
 
 const LoginForm: React.FC<IProsLoginFrom> = (props)=>{
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    let history = useHistory();
 
 
-    const login = (e:React.FormEvent)=>{
+    const login = async (e:React.FormEvent)=>{
+
         e.preventDefault();
         if(email.trim() === "" || password.trim() === "")
             return;
+        console.log("this is the user")
         const user = {
             email,password
         }
-        //console.log(user);
-        props.login(user).then((data)=>{
-            console.log("this is the data")
-            console.log(data);
-            props.history.push('/home')
-        }).catch((e)=>{
-            if(e.response)
-                setError(e.response.data.message);
-            else
-                setError("Failing conneting to server : " + e.message)
-        });
-        
+        console.log(user);
+        await props.login(user)
+        console.log("login")
+        if(props.loggedError === "")
+            history.push('/home')
+
     }
 
     const showMessage = () =>{
-        if(error){
-            return <div className="alert alert-danger">{error}</div>
+        if(props.loggedError){
+            return <div className="alert alert-danger">{props.loggedError}</div>
         }
-        return null;
     }
 
     return (<>

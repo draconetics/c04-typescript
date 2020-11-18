@@ -1,5 +1,6 @@
 export const SET_NOTES_DO = "SET_NOTES_DO";
 export const SET_NOTES_DONE = "SET_NOTES_DONE";
+export const SET_NOTES_ERROR = "SET_NOTES_ERROR"
 export const SET_NOTES_LOADING = "SET_NOTES_LOADING";
 export const SAVE_NOTE_DO_LIST = "SAVE_NOTE_DO_LIST";
 export const CREATE_NOTE_DO_LIST = "CREATE_NOTE_DO_LIST"
@@ -11,6 +12,7 @@ export const REG_SET_DETAIL = "REG_SET_DETAIL";
 export const REG_SET_LOADING = "REG_SET_LOADING";
 
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
+export const SET_LOGGED_ERROR = "SET_LOGGED_ERROR"
 export const SET_ISLOGGED = "SET_ISLOGGED";
 export const SET_AUTH_LOADING = "SET_AUTH_LOADING";
 export const SET_TOKEN = "SET_TOKEN";

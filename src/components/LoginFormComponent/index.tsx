@@ -2,13 +2,14 @@ import LoginFormComponent from './LoginFormComponent'
 import {loginUser} from '../../actions/authAction'
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state:any) =>{
+export const mapStateToProps = (state:any) =>{
     return {
-        authLoading: state.authReducer.authLoading
+        authLoading: state.authReducer.authLoading,
+        loggedError: state.authReducer.loggedError
     }
 }
 
-const mapDispatchToProps = (dispatch: AppDispatch)=>{
+export const mapDispatchToProps = (dispatch: AppDispatch)=>{
   
   return {
     login: (data:IAuthUser) => dispatch(loginUser(data)),

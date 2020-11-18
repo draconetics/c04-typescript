@@ -11,7 +11,7 @@ import NoteListComponent from "./components/NoteListComponent/";
 import MenuComponent from "./components/MenuComponent"
 import LoginFormComponent from "./components/LoginFormComponent"
 import RegisterFormComponent from "./components/RegisterFormComponent"
-import NotFoundPageComponent from "./components/NotFoundPageComponent"
+
 import HomeComponent from "./components/HomeComponent"
 
 
@@ -20,7 +20,7 @@ import HomeComponent from "./components/HomeComponent"
 
 const App: React.FC = () => {
 
-  console.log(localStorage.getItem('token'))
+  
   return (
     <React.Fragment>
       <BrowserRouter>

@@ -5,15 +5,14 @@ export const createUser = (data:IRegisterUser) => (dispatch:AppDispatch) =>{
     return userService.createUser(data)
         .then(resp => {
             // dispatch
-            console.log(resp)
-            dispatch([
-                {type: actionTypes.REG_SET_STATUS, value: "success"},
-                {type: actionTypes.REG_SET_LOADING, value: false},
-            ]);
+            //console.log("register action")
+            //console.log(resp);
+            dispatch({type: actionTypes.REG_SET_STATUS, value: "success"});
+            dispatch({type: actionTypes.REG_SET_LOADING, value: false});
             
         }).catch((e)=>{
-            console.log("catching error")
-            console.log(e.message)
+            //console.log("catching error")
+            //console.log(e.message)
             dispatch({
                 type: actionTypes.REG_SET_STATUS,
                 value: e.message

@@ -9,10 +9,11 @@ export const loginUser = (data:IAuthUser) =>(dispatch:AppDispatch) =>{
         return authService.login(data)
             .then(resp => {
                 // dispatch
-                console.log(resp.data.data)
+                //console.log(resp.data.data)
                 dispatch({type: actionTypes.SET_LOGGED_USER,value: resp.data.data.user});
                 dispatch({type: actionTypes.SET_TOKEN,value: resp.data.data.token});
                 dispatch({type: actionTypes.SET_AUTH_LOADING,value: false});
+                dispatch({type: actionTypes.SET_LOGGED_ERROR,value: ""});
                 
                 saveUserLocally(resp.data.data);
             }).catch((e)=>{
@@ -20,9 +21,13 @@ export const loginUser = (data:IAuthUser) =>(dispatch:AppDispatch) =>{
                     type: actionTypes.SET_AUTH_LOADING,
                     value: false
                 });
-                console.log("catching error")
-                console.log(e.message)
-                throw(e);
+                //console.log("catching error")
+                
+                dispatch({
+                    type: actionTypes.SET_LOGGED_ERROR,
+                    value: "Failing conneting to server: " + e.message
+                });
+                
             });
     };//end getNotes
   
@@ -36,18 +41,22 @@ export const logOut = () =>(dispatch:AppDispatch) =>{
         type: actionTypes.SET_AUTH_LOADING,
         value: true
     });
-    console.log("logout action");
+    //console.log("logout action");
     const token = localStorage.getItem('token') || "";
     return authService.logout(token)
                   .then((resp)=>{
-                      console.log("token deleted")
+                      //console.log("token deleted")
                       dispatch({type:actionTypes.SET_LOGGED_USER,value:null});
                       dispatch({type:actionTypes.SET_TOKEN,value:""});
                       dispatch({type:actionTypes.SET_AUTH_LOADING,value:false});
+                      dispatch({type: actionTypes.SET_LOGGED_ERROR,value: ""});
                         
                       deleteUserLocally();
                   })
-                  .catch(e=>{throw e})
+                  .catch(e=>{
+                    dispatch({type: actionTypes.SET_LOGGED_ERROR,value: "Error:" + e.message});
+                    dispatch({type:actionTypes.SET_AUTH_LOADING,value:false});
+                  })
 }
 
 const deleteUserLocally = ()=>{

@@ -17,7 +17,7 @@ const HomeComponent = (props:any) =>{
     return (<div data-test="HomePage">
         {showAlert()}
         <h2>home</h2>
-        {props.loggedUser?JSON.stringify(props.loggedUser):"User is logout"}
+        
     </div>);
 }
 
