@@ -13,6 +13,7 @@ import LoginFormComponent from "./components/LoginFormComponent"
 import RegisterFormComponent from "./components/RegisterFormComponent"
 
 import HomeComponent from "./components/HomeComponent"
+import NotFoundPageComponent from "./components/NotFoundPageComponent";
 
 
 
@@ -31,7 +32,7 @@ const App: React.FC = () => {
             <Route path="/todolist" component={TodoComponent}></Route>
             <Route path="/login" component={(localStorage.getItem('token')===null)?LoginFormComponent:HomeComponent}></Route>
             <Route path="/register" component={(localStorage.getItem('token')===null)?RegisterFormComponent:HomeComponent}></Route>
-            <Route path='/404' component={LoadingComponent} />
+            <Route path='/404' component={NotFoundPageComponent} />
             <Redirect from='*' to='/404' />
         </Switch>
       </BrowserRouter>

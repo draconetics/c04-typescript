@@ -1,5 +1,4 @@
 import { NextFunction } from "express";
-import { nextTick } from "process";
 import { HttpException } from "../../common/HttpException";
 import { ILogin } from "../../interfaces/IAuth";
 import { IUser } from "../../interfaces/IUser";
