@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 
 
 interface IPropsMenuComponent {
@@ -10,14 +10,10 @@ interface IPropsMenuComponent {
 
 
 const MenuComponent:React.FC<IPropsMenuComponent> = (props)=>{
-    //console.log(props.token);
-    return (<nav data-test="MenuComponent">
-        <div className="main-nav container">
-            <div className="logo">TodoWeb</div>
-            <ul className="main-menu">
-                <li><NavLink to="/" activeClassName="active" exact={true}>Home</NavLink>         
-                </li>
-                <li>
+    let history = useHistory();
+    const AuthMenuButtons = ()=>{
+        return <>
+            <li>
                     <NavLink to="/blog" activeClassName="active" >Blog</NavLink>         
                 </li>
                 <li>
@@ -26,12 +22,23 @@ const MenuComponent:React.FC<IPropsMenuComponent> = (props)=>{
                 <li>
                     <NavLink to="/todolist" activeClassName="active" >TodoList</NavLink>         
                 </li>
+        </>;
+    }
+
+    //console.log(props.token);
+    return (<nav data-test="MenuComponent">
+        <div className="main-nav container">
+            <div className="logo">TodoWeb</div>
+            <ul className="main-menu">
+                <li><NavLink to="/" activeClassName="active" exact={true}>Home</NavLink>         
+                </li>
+                {(props.token)?<AuthMenuButtons/>:null}
             </ul>
             <ul className="right-menu">
                 
                 {(props.token)?
                         (<>
-                        <li><button className="btn btn-primary" onClick={()=>props.logout()}>Logout</button></li>
+                        <li><a href="/#" className="btn btn-primary" onClick={()=>props.logout().then(()=>history.push("/home"))}>Logout</a></li>
                         </>)
                     :(<>
                     <li><NavLink activeClassName="active" to="/register">Sign Up</NavLink></li>

@@ -27,8 +27,11 @@ const LoginForm: React.FC<IProsLoginFrom> = (props)=>{
         console.log(user);
         await props.login(user)
         console.log("login")
-        if(props.loggedError === "")
-            history.push('/home')
+        if(props.loggedError === ""){
+            console.log("login and going to home!!!")
+            history.push('/home');
+        }
+            
 
     }
 
