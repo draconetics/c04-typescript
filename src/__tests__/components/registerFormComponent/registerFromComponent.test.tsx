@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import RegisterFormComponent from '../../../components/RegisterFormComponent/RegisterFormComponent';
+import RegisterFormComponent from '../../../pages/RegisterForm/RegisterForm';
 
 
 describe("#MenuComponent",()=>{

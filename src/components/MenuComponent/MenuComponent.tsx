@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink, useHistory} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 
 interface IPropsMenuComponent {
@@ -9,19 +9,19 @@ interface IPropsMenuComponent {
 }
 
 
-const MenuComponent:React.FC<IPropsMenuComponent> = (props)=>{
-    let history = useHistory();
+const MenuComponent:React.FC<IPropsMenuComponent> = ({authLoading, token, logout})=>{
+    
     const AuthMenuButtons = ()=>{
         return <>
             <li>
-                    <NavLink to="/blog" activeClassName="active" >Blog</NavLink>         
-                </li>
-                <li>
-                    <NavLink to="/notelist" activeClassName="active" >NoteList</NavLink>         
-                </li>
-                <li>
-                    <NavLink to="/todolist" activeClassName="active" >TodoList</NavLink>         
-                </li>
+                <NavLink to="/blog" activeClassName="active" >Blog</NavLink>         
+            </li>
+            <li>
+                <NavLink to="/notelist" activeClassName="active" >NoteList</NavLink>         
+            </li>
+            <li>
+                <NavLink to="/todolist" activeClassName="active" >TodoList</NavLink>         
+            </li>
         </>;
     }
 
@@ -32,13 +32,13 @@ const MenuComponent:React.FC<IPropsMenuComponent> = (props)=>{
             <ul className="main-menu">
                 <li><NavLink to="/" activeClassName="active" exact={true}>Home</NavLink>         
                 </li>
-                {(props.token)?<AuthMenuButtons/>:null}
+                {(token)?<AuthMenuButtons/>:null}
             </ul>
             <ul className="right-menu">
                 
-                {(props.token)?
+                {(token)?
                         (<>
-                        <li><a href="/#" className="btn btn-primary" onClick={()=>props.logout().then(()=>history.push("/home"))}>Logout</a></li>
+                        <li><a href="/#" className="btn btn-logout" onClick={()=>logout()}>Logout</a></li>
                         </>)
                     :(<>
                     <li><NavLink activeClassName="active" to="/register">Sign Up</NavLink></li>

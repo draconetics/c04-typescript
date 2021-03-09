@@ -46,15 +46,15 @@ interface IRegisterUser{
     password:string;
 }
 interface IRegisterStateReducer{
-    status:string;
-    detail:string;
-    loading:boolean;
+    registerRedirectUrl:object;
+    registerLoading:boolean;
+    registerError:string;
 }
 
 /*** authReducer */
 
 interface IAuthStateReducer{
-    loggedUser: any;
+    loggedUser: object;
     token: string;
     authLoading: boolean;
     loggedError:string;

@@ -3,7 +3,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { match, Router, useHistory } from 'react-router-dom';
 import {createMemoryHistory} from 'history'
-import LoginFormComponent from '../../../components/LoginFormComponent/LoginFormComponent';
+import LoginFormComponent from '../../../pages/LoginForm/LoginForm';
 
 import {http} from '../../../config/http-common'
 import LoadingComponent from '../../../components/LoadingComponent';
@@ -31,7 +31,7 @@ describe("#LoginFormComponent",()=>{
             expect(appWrapper.find(".login__form")).toHaveLength(1);
             expect(appWrapper.find('input').at(0).prop('type')).toBe("email");
             expect(appWrapper.find('input').at(1).prop('type')).toBe("password");
-            expect(appWrapper.find('button').prop('type')).toBe("submit");
+        
         })
 
         it('should call function login and redirect',()=>{

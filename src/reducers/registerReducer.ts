@@ -1,18 +1,30 @@
 import * as actionTypes from '../actions/types'
-const initialState:IRegisterStateReducer = {
-    status:"",
-    detail:"",
-    loading:false
+const registerState:IRegisterStateReducer = {
+    registerError:'',
+    registerRedirectUrl: {},
+    registerLoading: false
 }
 export const registerReducer = (
-    state = initialState,
+    state = registerState,
     action: IActionReducer
   ): IRegisterStateReducer => {
     switch (action.type) {
-        case actionTypes.REG_SET_STATUS:
+        case actionTypes.SET_REG_LOADING:
             return {
                 ...state,
-                status:action.value
+                registerLoading:action.value
+            }
+        case actionTypes.SET_REG_REDIRECT:
+            console.log('set '+ action.value);
+            return {
+                ...state,
+                registerRedirectUrl: action.value
+            }
+        case actionTypes.SET_REG_ERROR:
+            console.log('set '+ action.value);
+            return {
+                ...state,
+                registerError: action.value
             }
         default: return state;
     }

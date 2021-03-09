@@ -43,6 +43,7 @@ export const getNotes = () =>(dispatch:AppDispatch) =>{
                 listDone.push(item);
             else
                 listDo.push(item);
+                
         });
         
         dispatch({

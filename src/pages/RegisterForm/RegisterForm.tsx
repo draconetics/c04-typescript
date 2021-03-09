@@ -1,16 +1,17 @@
-import React,{useState, ChangeEvent, FocusEvent} from 'react';
+import React,{useState, ChangeEvent, FocusEvent, useEffect} from 'react';
 import { Redirect, RouteComponentProps  } from 'react-router-dom'
+import { isEmptyObject } from '../../utils/operations';
 
 interface IPropsRegisterFormComponent extends RouteComponentProps<any>{
-    status:string,
     loading: boolean,
-    createUser: (data:IRegisterUser)=> Promise<void>
+    redirect: object,
+    error: string,
+    createUser: (data:IRegisterUser)=> Promise<void>,
   }
 
 
 const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
-
-   
+    
     const inputInit = {
         value:"", 
         touched:false, 
@@ -21,11 +22,6 @@ const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
     const [email, setEmail] = useState(inputInit);
     const [password1, setPassword1] = useState(inputInit);
     const [password2, setPassword2] = useState(inputInit);
-    
-    //logged user should not access to     
-/*     if (props.isLogged === true) {
-        return <Redirect to="/" />;
-    } */
 
     const validateUsername = (inputUsername:any)=>{
         let error = "";
@@ -65,9 +61,15 @@ const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
     }
 
 
+    const verifyEmail = (email:string) => {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+      
+
     const validateEmail = (inputEmail:any) =>{
         let error = "";
-        if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(inputEmail.value)))
+        if (verifyEmail(inputEmail.value) === false)
             error = 'Email does not accepted';
         
         let isValidated = false;
@@ -97,7 +99,7 @@ const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
         
     }
 
-    const createUser= ()=>{
+    const createUser= async ()=>{
         //console.log("create user")
         const user = {
             name:username.value,
@@ -106,48 +108,18 @@ const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
         }
 
         //console.log(user);
-        props.createUser(user)
-        .then(() =>{
+        await props.createUser(user);
+       /*  console.log(props.error);
+        if(props.error === ''){
+            console.log("ok -> redirection")
             props.history.push({
-                pathname: '/home',    
-                state: { type:"success",message: "User successfully created." }
+                pathname: '/login',    
+                state: { type:"alert-success",message: "User successfully created." }
               })
-        })
-        .catch(e=>{     
-            
-        })
-        /*
-        UserService.createUser(user)
-            .then(resp =>{
-                console.log(resp.data);
-                props.saveRegisterAccepted(resp.data);
-                //showSuccessMessage();
-                props.history.push({
-                    pathname: '/home',    
-                    state: { type:"success",message: "User successfully created." }
-                  })
-            })
-            .catch(e=>{
-                props.saveRegisterFailed(e)        
-                props.history.push({
-                    pathname: '/home',    
-                    state: { type:"danger",message: "Error trying to register new user, please try again later" }
-                })        
-            })
-            */
+        } */
+        
     }
-/*
-    const showSuccessMessage=()=>{
-        console.log("show sucess")
-        setMsgSuccess("show");
-        //setTimeout(()=>{console.log("time out");setMsgSuccess("").bind(this);},50000);
-        const timeout = setTimeout(() => {
-            setMsgSuccess("")
-          }, 5000);
-      
-         return () => clearTimeout(timeout);
-    }
-*/
+
     const handleOnChange = (e:ChangeEvent<HTMLInputElement>) =>{
 
         let input = e.target
@@ -208,33 +180,27 @@ const RegisterFormComponent:React.FC<IPropsRegisterFormComponent> = (props)=>{
 
 
     const isDissabled = () =>{
-/*         console.log(username);
-        console.log(email)
-        console.log(password1)
-        console.log(password2) */
+
         return (username.isValidated && email.isValidated && password1.isValidated && password2.isValidated)?"":"disabled"
     }
-/*
-    const validatedMessage = (inputName) =>{
-        if(inputName.touched && inputName.error != null && inputName.error.length > 0)
-            return (<span className="text-danger">{inputName.error}</span>);
-        if(inputName.touched && inputName.error === ''){
-            //console.log("correct!")
-            return (<span className="text-success">{"Correct!"}
-                        
-                    </span>);
-        }
-            
-        return "";
-    }
-*/
+
     const showAsterisk = (input:IRegisterInput) => {
         return <span className="text danger">{input.touched && input.isValidated === false?"(*)":""}</span>;
     }
 
+    const showMessage = () => {
+        if(!isEmptyObject(props.redirect)){
+            return (<Redirect to={props.redirect} />);
+        }
+        if(props.error){
+            return (<span className="alert alert-danger">{props.error}</span>);
+        }
+        return null;
+    }
+
 
     return (<>
-        
+        {showMessage()}
         <div className="container">
             <div className="register-container">
                 <div className="register__logo"><img src="./assets/register-icon.png"  alt="login-logo"/></div>

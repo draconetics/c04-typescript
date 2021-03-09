@@ -1,12 +1,13 @@
-import LoginFormComponent from './LoginFormComponent'
+import LoginForm from './LoginForm'
 import {loginUser} from '../../actions/authAction'
 import { connect } from 'react-redux';
 
 export const mapStateToProps = (state:any) =>{
-    return {
-        authLoading: state.authReducer.authLoading,
-        loggedError: state.authReducer.loggedError
-    }
+  return {
+    authLoading: state.authReducer.authLoading,
+    loggedError: state.authReducer.loggedError,
+    loggedUser: state.authReducer.loggedUser,
+  }
 }
 
 export const mapDispatchToProps = (dispatch: AppDispatch)=>{
@@ -16,4 +17,4 @@ export const mapDispatchToProps = (dispatch: AppDispatch)=>{
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginFormComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

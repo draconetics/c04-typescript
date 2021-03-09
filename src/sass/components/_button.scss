@@ -24,10 +24,24 @@
     border: none;
 }
 
-
 .btn.btn-primary:hover{
     background-color: rgba($primary, .8);
     cursor: pointer;
+}
+
+.btn.btn-logout{
+    padding:0;
+    background-color: transparent;
+    border:2px solid $white;
+    padding: .5rem 1rem;
+    width: fit-content;
+    margin: .1rem .5rem;
+}
+
+.btn.btn-logout:hover{
+    background-color: $white;
+    color:$success;
+    border: 3px solid $success;
 }
 
 .disabled{

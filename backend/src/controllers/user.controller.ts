@@ -35,9 +35,16 @@ export const getUserList = async (
   
     try{
         validate(req.body);
-        let newUser:IUser = new User(req.body);
-        await newUser.save();
-        res.status(201).json({status:201,message:"success",data:newUser});
+        console.log(req.body.email);
+        const doesUserExit = await User.exists({ email: req.body.email });
+        console.log(doesUserExit);
+        if(doesUserExit){
+          res.status(400).json({status:400,message:"Email already in use."});
+        } else {
+          let newUser:IUser = new User(req.body);
+          await newUser.save();
+          res.status(201).json({status:201,message:"success",data:newUser});
+        }
     }catch(e){
         next(new HttpException(e.status,e.message));
     } 

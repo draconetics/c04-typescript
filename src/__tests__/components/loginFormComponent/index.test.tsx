@@ -1,5 +1,5 @@
 
-import { mapStateToProps, mapDispatchToProps} from '../../../components/LoginFormComponent/index';
+import { mapStateToProps, mapDispatchToProps} from '../../../pages/LoginForm/index';
 
 describe('#index - LoginFormComponent', () => {
     it('should map state:object to props', () => {

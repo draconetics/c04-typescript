@@ -1,5 +1,5 @@
 
-import { mapStateToProps, mapDispatchToProps} from '../../../components/RegisterFormComponent/index';
+import { mapStateToProps, mapDispatchToProps} from '../../../pages/RegisterForm/index';
 
 describe('#index - RegisterFormComponent', () => {
     it('should map state:object to props', () => {

@@ -6,13 +6,11 @@ export const SAVE_NOTE_DO_LIST = "SAVE_NOTE_DO_LIST";
 export const CREATE_NOTE_DO_LIST = "CREATE_NOTE_DO_LIST"
 export const DELETE_NOTE = "DELETE_NOTE"
 
-
-export const REG_SET_STATUS = "REG_SET_STATUS";
-export const REG_SET_DETAIL = "REG_SET_DETAIL";
-export const REG_SET_LOADING = "REG_SET_LOADING";
+export const SET_REG_REDIRECT = "SET_REG_REDIRECT";
+export const SET_REG_ERROR = "SET_REG_ERROR";
+export const SET_REG_LOADING = "SET_REG_LOADING";
 
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const SET_LOGGED_ERROR = "SET_LOGGED_ERROR"
-export const SET_ISLOGGED = "SET_ISLOGGED";
 export const SET_AUTH_LOADING = "SET_AUTH_LOADING";
-export const SET_TOKEN = "SET_TOKEN";
+export const SET_AUTH_TOKEN = "SET_TOKEN";

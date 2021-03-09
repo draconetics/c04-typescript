@@ -1,5 +1,5 @@
 
-import { mapStateToProps} from '../../../components/HomeComponent/index';
+import { mapStateToProps} from '../../../pages/Home/index';
 
 describe('#index - HomeComponent', () => {
     it('should map state:object to props', () => {

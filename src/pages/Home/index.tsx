@@ -1,4 +1,4 @@
-import HomeComponent from './HomeComponent'
+import Home from './Home'
 import { connect } from 'react-redux';
 
 
@@ -10,4 +10,4 @@ import { connect } from 'react-redux';
   }
  
   
-  export default connect(mapStateToProps)(HomeComponent);
+  export default connect(mapStateToProps)(Home);

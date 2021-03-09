@@ -2,7 +2,7 @@ import React from 'react'
 
 const HomeComponent = (props:any) =>{
 //    console.log(props.location.state?props.location.state.message:"");
-//    console.log(props);
+    console.log(props);
 
     const showAlert = () => {
         if(props.location && props.location.state){

@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import NotFoundPageComponent from '../../components/NotFoundPageComponent';
+import NotFoundPageComponent from '../../pages/NotFoundPageComponent';
 
 describe("#NotFoundComponent",()=>{
     describe("rendering properly", ()=>{

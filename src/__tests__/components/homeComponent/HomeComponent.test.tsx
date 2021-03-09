@@ -1,12 +1,14 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import TodoListComponent from '../../../components/TodoListComponent';
-import Home from '../../../components/HomeComponent/HomeComponent'
+import Home from '../../../pages/Home/Home'
 
 describe("#Home",()=>{
     describe("checking PropTypes", ()=>{
+        
         let routeComponentPropsMock:any;
         let appWrapper:any;
+        
         beforeAll((done)=>{
             routeComponentPropsMock = {
                 history: {} as any,
@@ -16,6 +18,7 @@ describe("#Home",()=>{
             appWrapper = shallow(<Home {...routeComponentPropsMock}/>)
             done();
         })
+        
         it("should render correctly",(done)=>{
             
             const addTodoComponent = appWrapper.find(`[data-test='HomePage']`);

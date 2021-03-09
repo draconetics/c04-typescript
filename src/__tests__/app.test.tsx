@@ -2,12 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Route } from 'react-router-dom';
 import App from '../App';
-import HomeComponent from '../components/HomeComponent/HomeComponent';
+import HomeComponent from '../pages/Home/Home';
 import { NoteListComponent } from '../components/NoteListComponent/NoteListComponent';
 import TodoComponent from '../components/TodoComponent';
 import LoadingComponent from '../components/LoadingComponent';
-import LoginForm from '../components/LoginFormComponent/LoginFormComponent';
-import RegisterFormComponent from '../components/RegisterFormComponent';
+import LoginForm from '../pages/LoginForm/LoginForm';
+import RegisterFormComponent from '../pages/RegisterForm';
 
 let pathMap:any = {};
 
